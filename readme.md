@@ -60,6 +60,18 @@ services:
 ```
 
 ### First-Time Setup
+
+Create a log folder to mount as a volume for persistent logs:
+```bash
+mkdir local-log-path
+```
+
+In order to access the logs from the container user (1001) make sure to change the permissions of the log folder:
+```bash
+chown 1001:<sys-user-or-whatever> ./local-log-path
+chmod -R 755 ./local-log-path
+```
+
 To build and start the honeypot, run:
 ```bash
 docker compose up -d --build && docker compose logs -f
