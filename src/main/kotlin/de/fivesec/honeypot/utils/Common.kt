@@ -15,7 +15,6 @@ fun getHostnameFromIp(ipAddress: String): String {
             hostname
         }
     } catch (e: Exception) {
-        "Failed to resolve hostname for $ipAddress: ${e.message}"
         return "unknown"
     }
 }
