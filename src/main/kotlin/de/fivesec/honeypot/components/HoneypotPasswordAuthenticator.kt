@@ -29,6 +29,8 @@ class HoneypotPasswordAuthenticator(
             .addKeyValue("username", username).addKeyValue("password", password)
             .addKeyValue("session", session?.sessionId).addKeyValue("hostname", resolvedHostname)
             .addKeyValue("timestamp", Instant.now().toString())
+            .addKeyValue("address", clientAddress)
+            .addKeyValue("event", "authentication_attempt")
             .log()
 
         if (username == honeypotConfiguration.username && password == honeypotConfiguration.password) {
