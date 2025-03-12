@@ -1,5 +1,6 @@
 package de.fivesec.honeypot.components
 
+import de.fivesec.honeypot.utils.getHostnameFromIp
 import org.apache.sshd.common.session.Session
 import org.apache.sshd.common.session.SessionListener
 import org.apache.sshd.server.session.ServerSession
@@ -15,16 +16,26 @@ class HoneypotSessionListener : SessionListener {
     override fun sessionCreated(session: Session?) {
         if (session != null && session is ServerSession) {
             val clientAddress = (session.clientAddress as? InetSocketAddress)?.address?.hostAddress ?: "unknown"
-            LOG.atInfo().setMessage("Session created - Session id: ${session.sessionId} from: $clientAddress")
-                .addKeyValue("address", clientAddress).addKeyValue("sessionID", session.sessionId).log()
+            val hostname = getHostnameFromIp(clientAddress)
+
+            LOG.atInfo()
+                .setMessage("Session created - Session id: ${session.sessionId} from: $clientAddress hostname: $hostname")
+                .addKeyValue("address", clientAddress)
+                .addKeyValue("sessionID", session.sessionId)
+                .addKeyValue("hostname", hostname).log()
         }
     }
 
     override fun sessionClosed(session: Session?) {
         if (session != null && session is ServerSession) {
             val clientAddress = (session.clientAddress as? InetSocketAddress)?.address?.hostAddress ?: "unknown"
-            LOG.atInfo().setMessage("Session closed - Session id: ${session.sessionId} from: $clientAddress")
-                .addKeyValue("address", clientAddress).addKeyValue("sessionID", session.sessionId).log()
+            val hostname = getHostnameFromIp(clientAddress)
+
+            LOG.atInfo()
+                .setMessage("Session closed - Session id: ${session.sessionId} from: $clientAddress hostname: $hostname")
+                .addKeyValue("address", clientAddress)
+                .addKeyValue("sessionID", session.sessionId)
+                .addKeyValue("hostname", hostname).log()
         }
     }
 
