@@ -4,18 +4,18 @@ import java.net.InetAddress
 import java.security.MessageDigest
 import java.time.Instant
 
-fun getHostnameFromIp(ipAddress: String): String {
+fun getHostnameFromIp(ipAddress: String): String? {
     return try {
         val addr = InetAddress.getByName(ipAddress)
         val hostname = addr.hostName
 
         if (hostname == ipAddress) {
-            "No hostname found for $ipAddress"
+            null
         } else {
             hostname
         }
     } catch (e: Exception) {
-        return "unknown"
+        return null
     }
 }
 

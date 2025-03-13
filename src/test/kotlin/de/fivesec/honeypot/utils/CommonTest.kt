@@ -21,7 +21,20 @@ class CommonTest {
         )
 
         assertThat(hostname).isEqualTo("localhost")
-        
+
+    }
+
+    @Test
+    fun `#Common - getHostnameFromIp - should return null`() {
+
+        val mockInetAddress = mock(InetAddress::class.java)
+        `when`(mockInetAddress.hostName).thenReturn("0.0.0.0")
+
+        val hostname = getHostnameFromIp(
+            ipAddress = "0.0.0.0"
+        )
+
+        assertThat(hostname).isNull()
     }
 
     @Test
