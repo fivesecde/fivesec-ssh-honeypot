@@ -1,5 +1,7 @@
 # Fivesec SSH Honeypot
 
+Made with ❤️ by [@fivesec](https://fivesec.de)
+
 ## About
 
 Fivesec SSH Honeypot is a lightweight and easy-to-use SSH honeypot that logs all login attempts and session activity for forensic analysis. It provides a fake shell for intruders and captures all executed commands in a structured format.

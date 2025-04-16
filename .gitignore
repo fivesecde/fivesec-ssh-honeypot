@@ -3,6 +3,7 @@
 /.idea
 /.vscode
 logs
+*.gz
 HELP.md
 .gradle
 build/
